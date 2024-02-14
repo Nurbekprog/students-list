@@ -26,8 +26,9 @@ function displayStudents(students) {
         <td>${student.id}</td>
         <td>${student.firstName}</td>
         <td>${student.lastName}</td>
+        <td>${student.salary}</td>
         <td>${student.group}</td>
-        <td>${student.doesWork ? 'Ha' : "Yo'q"}</td>
+        <td>${student.doesWork ? "Ha" : "Yo'q"}</td>
         <td>
           <button class="btn btn-sm btn-warning" data-bs-toggle="modal"
           data-bs-target="#editModal" onclick="handleEdit(${
