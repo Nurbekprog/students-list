@@ -1,32 +1,31 @@
-let students = JSON.parse(localStorage.getItem('students')) || [];
+let students = JSON.parse(localStorage.getItem("students")) || [];
 let studentEditing = null;
 
-const studentList = document.getElementById('student-list');
-const search = document.getElementById('search');
-const filter = document.getElementById('filter');
-const btnAdd = document.getElementById('btn-add');
-const btnEdit = document.getElementById('btn-edit');
-const btnUpdate = document.getElementById('btn-update');
+const studentList = document.getElementById("student-list");
+const search = document.getElementById("search");
+const filter = document.getElementById("filter");
+const btnAdd = document.getElementById("btn-add");
+const btnEdit = document.getElementById("btn-edit");
+const btnUpdate = document.getElementById("btn-update");
 
-const firstName = document.getElementById('firstName');
-const lastName = document.getElementById('lastName');
-const group = document.getElementById('group');
-const doesWork = document.getElementById('doesWork');
+const firstName = document.getElementById("firstName");
+const lastName = document.getElementById("lastName");
+const group = document.getElementById("group");
+const doesWork = document.getElementById("doesWork");
 
-const firstNameEdit = document.getElementById('firstNameEdit');
-const lastNameEdit = document.getElementById('lastNameEdit');
-const groupEdit = document.getElementById('groupEdit');
-const doesWorkEdit = document.getElementById('doesWorkEdit');
+const firstNameEdit = document.getElementById("firstNameEdit");
+const lastNameEdit = document.getElementById("lastNameEdit");
+const groupEdit = document.getElementById("groupEdit");
+const doesWorkEdit = document.getElementById("doesWorkEdit");
 
 function displayStudents(students) {
-  let str = '';
+  let str = "";
   students.forEach((student) => {
     str += `
       <tr >
         <td>${student.id}</td>
         <td>${student.firstName}</td>
         <td>${student.lastName}</td>
-        <td>${student.salary}</td>
         <td>${student.group}</td>
         <td>${student.doesWork ? "Ha" : "Yo'q"}</td>
         <td>
@@ -46,7 +45,7 @@ function displayStudents(students) {
 
 displayStudents(students);
 
-btnAdd.addEventListener('click', function (e) {
+btnAdd.addEventListener("click", function (e) {
   e.preventDefault();
   const newStudent = {
     id: students.length + 1,
@@ -57,20 +56,20 @@ btnAdd.addEventListener('click', function (e) {
   };
   let newStudents = [...students, newStudent];
   displayStudents(newStudents);
-  localStorage.setItem('students', JSON.stringify(newStudents));
+  localStorage.setItem("students", JSON.stringify(newStudents));
 });
 
 function deleteStudent(studentId) {
-  if (confirm('Are you sure you want to delete this student?')) {
-    let students = JSON.parse(localStorage.getItem('students'));
+  if (confirm("Are you sure you want to delete this student?")) {
+    let students = JSON.parse(localStorage.getItem("students"));
     let newStudents = students.filter((student) => student.id !== studentId);
     displayStudents(newStudents);
-    localStorage.setItem('students', JSON.stringify(newStudents));
+    localStorage.setItem("students", JSON.stringify(newStudents));
   }
 }
 
 function handleEdit(studentId) {
-  const students = JSON.parse(localStorage.getItem('students'));
+  const students = JSON.parse(localStorage.getItem("students"));
   const studentEdit = students.find((student) => student.id === studentId);
   studentEditing = studentEdit;
 
@@ -80,7 +79,7 @@ function handleEdit(studentId) {
   doesWorkEdit.checked = studentEdit.doesWork;
 }
 
-btnUpdate.addEventListener('click', function (e) {
+btnUpdate.addEventListener("click", function (e) {
   e.preventDefault();
   let studentId = studentEditing.id;
   let studentUpdated = {
@@ -91,17 +90,17 @@ btnUpdate.addEventListener('click', function (e) {
     doesWork: doesWorkEdit.checked,
   };
 
-  let students = JSON.parse(localStorage.getItem('students'));
+  let students = JSON.parse(localStorage.getItem("students"));
   let newStudents = students.map((student) =>
     student.id === studentId ? studentUpdated : student
   );
   displayStudents(newStudents);
-  localStorage.setItem('students', JSON.stringify(newStudents));
+  localStorage.setItem("students", JSON.stringify(newStudents));
 });
 
-search.addEventListener('input', function (e) {
+search.addEventListener("input", function (e) {
   let text = e.target.value.toLowerCase();
-  let students = JSON.parse(localStorage.getItem('students'));
+  let students = JSON.parse(localStorage.getItem("students"));
   let newStudents = students.filter(
     (student) =>
       student.firstName.toLowerCase().includes(text) ||
@@ -111,11 +110,11 @@ search.addEventListener('input', function (e) {
   displayStudents(newStudents);
 });
 
-filter.addEventListener('change', function (e) {
+filter.addEventListener("change", function (e) {
   let value = e.target.value;
-  let students = JSON.parse(localStorage.getItem('students'));
+  let students = JSON.parse(localStorage.getItem("students"));
   let newStudents =
-    value === 'All'
+    value === "All"
       ? students
       : students.filter((student) => student.group === value);
   displayStudents(newStudents);
